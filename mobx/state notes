@@ -1,0 +1,12 @@
+store items
+
+//creation
+thing.index
+thing.name
+thing.goal
+thing.times
+thing.per
+
+//events log
+thing.index.times.timestamp
+
