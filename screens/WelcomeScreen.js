@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { View, Text, AsyncStorage } from 'react-native';
 import { Button } from 'react-native-elements';
 import Chart from '../components/chart';
-
+// this is the master branch
 class WelcomeScreen extends Component {
   onPress = async () => {
     await AsyncStorage.setItem('token', 'true');
