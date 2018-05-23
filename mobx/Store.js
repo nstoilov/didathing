@@ -2,18 +2,16 @@ import { observable } from 'mobx';
 
 class Store {
   @observable
-  thing = {
+  goal = {
     name: 'placeholder',
     times: 0,
-    per: 'day',
-    events: []
+    per: 'day'
   };
+  @observable events = {};
 
   update = (key, item) => {
-    this.thing[key] = item;
+    this.goal[key] = item;
   };
-
-  speakData = () => console.log(this.thing);
 }
 
 const store = new Store();

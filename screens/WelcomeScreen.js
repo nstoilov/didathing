@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text, AsyncStorage } from 'react-native';
 import { Button } from 'react-native-elements';
-import Chart from '../components/chart';
 //branch is staterefactor
 class WelcomeScreen extends Component {
   onPress = async () => {
@@ -13,7 +12,6 @@ class WelcomeScreen extends Component {
     return (
       <View style={styles.container}>
         <Text style={styles.text}> Welcome </Text>
-        <Chart />
         <View style={styles.buttonContainer}>
           <Button
             title="Add thing"

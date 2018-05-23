@@ -4,6 +4,7 @@ import { observer } from 'mobx-react';
 import Storage from 'react-native-storage';
 import { Button } from 'react-native-elements';
 import store from '../mobx/Store';
+import Chart from '../components/chart';
 
 let index = 0;
 const storage = new Storage({
@@ -19,8 +20,8 @@ global.storage = storage;
 class ChartScreen extends Component {
   async componentWillMount() {
     await storage.clearMap();
-    const thing = await AsyncStorage.getItem('thing');
-    store.thing = JSON.parse(thing);
+    const goal = await AsyncStorage.getItem('goal');
+    store.goal = JSON.parse(goal);
   }
 
   onPressEdit = () => {
@@ -41,10 +42,10 @@ class ChartScreen extends Component {
 
     const result = await storage.getAllDataForKey('event');
     store.events = result;
-    console.log(store.events);
+    console.log(store.events.length);
   }
 
-  //dataset is store.events & store.thing :)
+  //dataset is store.events & store.goal :)
   render() {
     return (
       <View style={styles.containerStyle}>
@@ -55,18 +56,22 @@ class ChartScreen extends Component {
           buttonStyle={styles.buttonConfirmStyle}
           onPress={() => this.onPressEdit()}
         />
-        <Text style={{ fontSize: 20, color: 'black' }}>{`Thing is ${
-          store.thing.name
-        }`}</Text>
-        <Text style={{ fontSize: 20, color: 'black' }}>
-          {`Thing is done ${store.thing.times}`}
+        <Text
+          style={{
+            marginTop: 30,
+            fontSize: 25,
+            color: 'black',
+            textAlign: 'center'
+          }}
+        >
+          {store.goal.name}
         </Text>
-        <Text style={{ fontSize: 20, color: 'black' }}>{`per ${
-          store.thing.per
-        }`}</Text>
-        <Text style={{ fontSize: 20, color: 'black' }}>{`dataset ${
-          this.result
-        }`}</Text>
+        <Chart />
+
+        <Text style={{ fontSize: 20, color: 'black', marginBottom: 20 }}>
+          {`Goal is ${store.goal.times} times per ${store.goal.per}`}
+        </Text>
+
         <Button
           title="Did it"
           large

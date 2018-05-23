@@ -16,8 +16,8 @@ class EditScreen extends Component {
   };
 
   OnPress = async () => {
-    store.thing.name = this.state.name;
-    await AsyncStorage.setItem('thing', JSON.stringify(store.thing));
+    store.goal.name = this.state.name;
+    await AsyncStorage.setItem('goal', JSON.stringify(store.goal));
     this.props.navigation.navigate('chart');
   };
 

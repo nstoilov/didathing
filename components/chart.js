@@ -1,26 +1,27 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
+import { observer } from 'mobx-react';
 import {
   VictoryBar,
   VictoryChart,
   VictoryTheme,
   VictoryLabel,
-  VictoryAxis,
-  VictoryLine
+  VictoryAxis
 } from 'victory-native';
 import store from '../mobx/Store';
 
-const data = [
-  { day: 1, times: 2 },
-  { day: 2, times: 4 },
-  { day: 3, times: 3 },
-  { day: 4, times: 2 }
-];
+console.log('store.events, store.goal: ', store.events, store.goal);
 
-console.log(store.thing.name);
-
+@observer
 export default class Chart extends React.Component {
   render() {
+    const data = [
+      { day: 1, times: 1 || 0 },
+      { day: 2, times: 4 },
+      { day: 3, times: 3 },
+      { day: 4, times: 2 }
+    ];
+
     return (
       <View style={styles.container}>
         <VictoryChart
@@ -30,7 +31,7 @@ export default class Chart extends React.Component {
           domain={[0, 5]}
         >
           <VictoryAxis
-            tickValues={[1, 2, 3, 4]}
+            //    tickValues={[1, 2, 3, 4]}
             tickFormat={['day 1', 'day 2', 'day 3', 'day 4']}
           />
           <VictoryAxis dependentAxis tickFormat={x => `x${x}`} />
@@ -41,10 +42,6 @@ export default class Chart extends React.Component {
             labels={d => d.y}
             style={{ labels: { fill: 'white' } }}
             labelComponent={<VictoryLabel dy={30} />}
-          />
-          <VictoryLine
-            style={{ data: { stroke: 'blue', strokeWidth: 5 } }}
-            y={d => d.x}
           />
         </VictoryChart>
       </View>
