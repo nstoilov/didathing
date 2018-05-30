@@ -1,4 +1,5 @@
 import { observable } from 'mobx';
+import { AsyncStorage } from 'react-native';
 
 class Store {
   @observable
@@ -11,6 +12,10 @@ class Store {
 
   update = (key, item) => {
     this.thing[key] = item;
+  };
+
+  saveReturnUserToken = () => {
+    AsyncStorage.setItem('token', 'true');
   };
 
   speakData = () => console.log(this.thing);
