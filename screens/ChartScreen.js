@@ -1,19 +1,13 @@
 import React, { Component } from 'react';
 import { View, Text, AsyncStorage } from 'react-native';
 import { observer } from 'mobx-react';
-import Storage from 'react-native-storage';
 import { Button } from 'react-native-elements';
+import moment from 'moment';
 import store from '../mobx/Store';
+import storage from '../components/storage';
+import Chart from '../components/chart';
 
 let index = 0;
-const storage = new Storage({
-  size: 1000,
-  storageBackend: AsyncStorage,
-  defaultExpires: 1000 * 3600 * 24,
-  enableCache: true,
-  sync: {}
-});
-global.storage = storage;
 
 @observer
 class ChartScreen extends Component {
@@ -28,7 +22,7 @@ class ChartScreen extends Component {
   };
 
   async onPressDidIt() {
-    const date = new Date().toISOString();
+    const date = moment().format('YYYYMMDD');
     await storage.save({
       key: 'event',
       id: index,
@@ -39,9 +33,10 @@ class ChartScreen extends Component {
     });
     index++;
 
-    const result = await storage.getAllDataForKey('event');
-    store.events = result;
-    console.log(store.events);
+    store.events = await storage.getAllDataForKey('event');
+
+    store.speakEvents();
+    // store.testMoment();
   }
 
   //dataset is store.events & store.thing :)
@@ -55,15 +50,13 @@ class ChartScreen extends Component {
           buttonStyle={styles.buttonConfirmStyle}
           onPress={() => this.onPressEdit()}
         />
+        <Chart />
         <Text style={{ fontSize: 20, color: 'black' }}>{`Thing is ${
           store.thing.name
         }`}</Text>
         <Text style={{ fontSize: 20, color: 'black' }}>
-          {`Thing is done ${store.thing.times}`}
+          {`Goal is ${store.thing.times} per ${store.thing.per}`}
         </Text>
-        <Text style={{ fontSize: 20, color: 'black' }}>{`per ${
-          store.thing.per
-        }`}</Text>
         <Text style={{ fontSize: 20, color: 'black' }}>{`dataset ${
           this.result
         }`}</Text>

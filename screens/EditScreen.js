@@ -10,7 +10,7 @@ import store from '../mobx/Store';
 @observer
 class EditScreen extends Component {
   state = {
-    name: 'name',
+    name: '',
     times: 1,
     per: 'day'
   };
@@ -27,7 +27,7 @@ class EditScreen extends Component {
         <Text style={styles.titleStyle}>Name your thing:</Text>
         <View>
           <TextInput
-            placeholder="name"
+            placeholder={store.thing.name}
             value={this.state.value}
             onChangeText={text => this.setState({ name: text })}
             underlineColorAndroid="grey"

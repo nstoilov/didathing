@@ -9,15 +9,13 @@ import {
   VictoryLine
 } from 'victory-native';
 import store from '../mobx/Store';
-
+/*
 const data = [
   { day: 1, times: 2 },
   { day: 2, times: 4 },
   { day: 3, times: 3 },
   { day: 4, times: 2 }
-];
-
-console.log(store.thing.name);
+]; */
 
 export default class Chart extends React.Component {
   render() {
@@ -31,11 +29,11 @@ export default class Chart extends React.Component {
         >
           <VictoryAxis
             tickValues={[1, 2, 3, 4]}
-            tickFormat={['day 1', 'day 2', 'day 3', 'day 4']}
+            tickFormat={store.chartLegends.slice()}
           />
           <VictoryAxis dependentAxis tickFormat={x => `x${x}`} />
           <VictoryBar
-            data={data}
+            data={store.chartData.slice()}
             x="day"
             y="times"
             labels={d => d.y}

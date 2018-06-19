@@ -9,7 +9,7 @@ export default class AppContainer extends React.Component {
   state = { token: null };
 
   async componentWillMount() {
-    //AsyncStorage.removeItem('token');
+    //  AsyncStorage.removeItem('token');
     // eslint-disable-next-line
     let token = await AsyncStorage.getItem('token');
     if (token) {
