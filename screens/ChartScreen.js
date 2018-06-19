@@ -12,7 +12,8 @@ let index = 0;
 @observer
 class ChartScreen extends Component {
   async componentWillMount() {
-    await storage.clearMap();
+    //uncomment below to delete storage
+    //await storage.clearMap();
     const thing = await AsyncStorage.getItem('thing');
     store.thing = JSON.parse(thing);
   }
@@ -35,8 +36,9 @@ class ChartScreen extends Component {
 
     store.events = await storage.getAllDataForKey('event');
 
-    store.speakEvents();
-    // store.testMoment();
+    //  store.speakEvents();
+    store.getTodayEvents();
+    store.getYesterdayEvents();
   }
 
   //dataset is store.events & store.thing :)
@@ -85,7 +87,9 @@ const styles = {
     height: 55,
     borderColor: 'black',
     borderWidth: 1,
-    borderRadius: 20
+    borderRadius: 20,
+    marginBottom: 10,
+    marginTop: 10
   }
 };
 

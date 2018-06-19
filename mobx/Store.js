@@ -12,7 +12,11 @@ class Store {
 
   @observable events = [];
 
-  //currentDate = new Date().getDate();
+  today = moment().format('YYYYMMDD');
+  yesterday = moment()
+    .subtract(1, 'days')
+    .format('YYYYMMDD');
+
   todayMinus3 = moment()
     .subtract(2, 'days')
     .format('dddd');
@@ -20,6 +24,7 @@ class Store {
     .subtract(3, 'days')
     .format('dddd');
 
+  //dummy data
   @observable
   chartData = [
     { day: 1, times: 2 },
@@ -36,6 +41,9 @@ class Store {
     'Today'
   ];
 
+  @observable events = [];
+  @observable todayEvents = this.getTodayEvents();
+
   update = (key, item) => {
     this.thing[key] = item;
   };
@@ -49,15 +57,22 @@ class Store {
       .slice()
       .map(event => console.log('event.date', event.date.slice()));
 
-  /*
-  sortEvents = () => {
+  getTodayEvents = () => {
     const result = store.events
       .slice()
-      .filter(
-        event => event.date.slice(0, 16) === this.currentDate.slice(0, 4)
-      );
-    console.log(result);
-  }; */
+      .filter(event => event.date === this.today);
+    console.log('todaysEvents: ', result.slice().length);
+    console.log('currentDate', this.today);
+    return result.slice().length;
+  };
+
+  getYesterdayEvents = () => {
+    const result = store.events
+      .slice()
+      .filter(event => event.date === this.yesterday);
+    console.log('yesterdayEvents: ', result.slice().length);
+    console.log('yesterday', this.yesterday);
+  };
 
   testMoment = () => {
     const now = moment().format('YYYYMMDD');

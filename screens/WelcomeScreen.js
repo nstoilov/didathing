@@ -3,7 +3,7 @@ import { View, Text } from 'react-native';
 import { Button } from 'react-native-elements';
 import Chart from '../components/chart';
 import store from '../mobx/Store';
-// this is the master branch
+
 class WelcomeScreen extends Component {
   onPress = async () => {
     store.saveReturnUserToken();
