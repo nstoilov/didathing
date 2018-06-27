@@ -3,20 +3,10 @@ import { AsyncStorage } from 'react-native';
 import moment from 'moment';
 
 class Store {
-  @observable
-  thing = {
-    name: 'placeholder',
-    times: 0,
-    per: 'day'
-  };
-
-  @observable events = [];
-
   today = moment().format('YYYYMMDD');
   yesterday = moment()
     .subtract(1, 'days')
     .format('YYYYMMDD');
-
   todayMinus3 = moment()
     .subtract(2, 'days')
     .format('dddd');
@@ -24,9 +14,17 @@ class Store {
     .subtract(3, 'days')
     .format('dddd');
 
-  //dummy data
   @observable
-  chartData = [
+  goal = {
+    name: 'name',
+    times: 0,
+    per: 'day'
+  };
+
+  @observable events = [];
+
+  @observable
+  testData = [
     { day: 1, times: 2 },
     { day: 2, times: 4 },
     { day: 3, times: 3 },
@@ -41,48 +39,36 @@ class Store {
     'Today'
   ];
 
-  @observable events = [];
   @observable todayEvents = this.getTodayEvents();
 
-  update = (key, item) => {
-    this.thing[key] = item;
+  setGoal = (key, item) => {
+    this.goal[key] = item;
   };
+
+  addEvent = date => this.events.push(date);
 
   saveReturnUserToken = () => {
     AsyncStorage.setItem('token', 'true');
   };
 
-  speakEvents = () =>
-    store.events
-      .slice()
-      .map(event => console.log('event.date', event.date.slice()));
+  speakEvents = () => {
+    console.log('store.events.slice(): ', this.events.slice());
+    console.log('today: ', this.today);
+  };
 
   getTodayEvents = () => {
-    const result = store.events
-      .slice()
-      .filter(event => event.date === this.today);
+    const result = this.events.slice().filter(event => event === this.today);
     console.log('todaysEvents: ', result.slice().length);
     console.log('currentDate', this.today);
     return result.slice().length;
   };
 
   getYesterdayEvents = () => {
-    const result = store.events
+    const result = this.events
       .slice()
-      .filter(event => event.date === this.yesterday);
+      .filter(event => event === this.yesterday);
     console.log('yesterdayEvents: ', result.slice().length);
     console.log('yesterday', this.yesterday);
-  };
-
-  testMoment = () => {
-    const now = moment().format('YYYYMMDD');
-    console.log('now: ', now);
-    console.log(
-      'last week: ',
-      moment()
-        .subtract(7, 'd')
-        .format('YYYYMMDD')
-    );
   };
 }
 

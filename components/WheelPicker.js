@@ -17,7 +17,7 @@ class WheelPicker extends Component {
     this.setState({
       selectedItem: index
     });
-    store.update('times', index);
+    store.setGoal('times', index);
   }
 
   onAddItem = () => {

@@ -1,47 +1,25 @@
 import React, { Component } from 'react';
-import { View, Text, AsyncStorage } from 'react-native';
+import { View, Text } from 'react-native';
 import { observer } from 'mobx-react';
 import { Button } from 'react-native-elements';
 import moment from 'moment';
 import store from '../mobx/Store';
-import storage from '../components/storage';
-import Chart from '../components/chart';
 
-let index = 0;
+import Chart from '../components/chart';
 
 @observer
 class ChartScreen extends Component {
-  async componentWillMount() {
-    //uncomment below to delete storage
-    //await storage.clearMap();
-    const thing = await AsyncStorage.getItem('thing');
-    store.thing = JSON.parse(thing);
-  }
-
   onPressEdit = () => {
     this.props.navigation.navigate('edit');
   };
 
-  async onPressDidIt() {
+  onPressDidIt() {
     const date = moment().format('YYYYMMDD');
-    await storage.save({
-      key: 'event',
-      id: index,
-      data: {
-        date
-      },
-      expires: 1000 * 3600
-    });
-    index++;
-
-    store.events = await storage.getAllDataForKey('event');
-
-    //  store.speakEvents();
+    store.addEvent(date);
     store.getTodayEvents();
-    store.getYesterdayEvents();
+    store.speakEvents();
   }
 
-  //dataset is store.events & store.thing :)
   render() {
     return (
       <View style={styles.containerStyle}>
@@ -54,14 +32,11 @@ class ChartScreen extends Component {
         />
         <Chart />
         <Text style={{ fontSize: 20, color: 'black' }}>{`Thing is ${
-          store.thing.name
+          store.goal.name
         }`}</Text>
         <Text style={{ fontSize: 20, color: 'black' }}>
-          {`Goal is ${store.thing.times} per ${store.thing.per}`}
+          {`Goal is ${store.goal.times} per ${store.goal.per}`}
         </Text>
-        <Text style={{ fontSize: 20, color: 'black' }}>{`dataset ${
-          this.result
-        }`}</Text>
         <Button
           title="Did it"
           large

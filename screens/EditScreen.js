@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, TextInput, AsyncStorage } from 'react-native';
+import { View, Text, TextInput } from 'react-native';
 import { observer } from 'mobx-react';
 import { Button } from 'react-native-elements';
 import { HideWithKeyboard } from 'react-native-hide-with-keyboard';
@@ -9,15 +9,7 @@ import store from '../mobx/Store';
 
 @observer
 class EditScreen extends Component {
-  state = {
-    name: '',
-    times: 1,
-    per: 'day'
-  };
-
   OnPress = async () => {
-    store.thing.name = this.state.name;
-    await AsyncStorage.setItem('thing', JSON.stringify(store.thing));
     this.props.navigation.navigate('chart');
   };
 
@@ -27,9 +19,8 @@ class EditScreen extends Component {
         <Text style={styles.titleStyle}>Name your thing:</Text>
         <View>
           <TextInput
-            placeholder={store.thing.name}
-            value={this.state.value}
-            onChangeText={text => this.setState({ name: text })}
+            placeholder={store.goal.name}
+            onChangeText={text => store.setGoal('name', text)}
             underlineColorAndroid="grey"
             style={styles.inputStyle}
           />

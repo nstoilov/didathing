@@ -17,7 +17,7 @@ class TimePicker extends Component {
     this.setState({
       selectedItem: index
     });
-    store.update('per', this.state.itemList[index]);
+    store.setGoal('per', this.state.itemList[index]);
   }
 
   onAddItem = () => {
