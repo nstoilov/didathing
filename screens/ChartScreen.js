@@ -16,7 +16,7 @@ class ChartScreen extends Component {
   onPressDidIt() {
     const date = moment().format('YYYYMMDD');
     store.addEvent(date);
-    store.getTodayEvents();
+    store.getYesterdayEvents();
     store.speakEvents();
   }
 
