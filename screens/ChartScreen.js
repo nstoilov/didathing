@@ -17,7 +17,6 @@ class ChartScreen extends Component {
     const date = moment().format('YYYYMMDD');
     store.addEvent(date);
     store.getYesterdayEvents();
-    store.speakEvents();
   }
 
   render() {
@@ -30,7 +29,7 @@ class ChartScreen extends Component {
           buttonStyle={styles.buttonConfirmStyle}
           onPress={() => this.onPressEdit()}
         />
-        <Chart />
+        <Chart line="1" />
         <Text style={{ fontSize: 20, color: 'black' }}>{`Thing is ${
           store.goal.name
         }`}</Text>
