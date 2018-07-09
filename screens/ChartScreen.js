@@ -4,8 +4,7 @@ import { observer } from 'mobx-react';
 import { Button } from 'react-native-elements';
 import moment from 'moment';
 import store from '../mobx/Store';
-
-import Chart from '../components/chart';
+import Chart from '../components/Chart';
 
 @observer
 class ChartScreen extends Component {
@@ -22,42 +21,51 @@ class ChartScreen extends Component {
   render() {
     return (
       <View style={styles.containerStyle}>
-        <Button
-          title="edit"
-          large
-          color="black"
-          buttonStyle={styles.buttonConfirmStyle}
-          onPress={() => this.onPressEdit()}
-        />
-        <Chart line="1" />
+        <View style={styles.buttons}>
+          <Button
+            title="edit"
+            large
+            color="black"
+            buttonStyle={styles.buttonConfirmStyle}
+            onPress={() => this.onPressEdit()}
+          />
+          <Button
+            title="Did it"
+            large
+            color="black"
+            buttonStyle={styles.buttonConfirmStyle}
+            onPress={() => this.onPressDidIt()}
+          />
+        </View>
+        <Chart />
         <Text style={{ fontSize: 20, color: 'black' }}>{`Thing is ${
           store.goal.name
         }`}</Text>
         <Text style={{ fontSize: 20, color: 'black' }}>
           {`Goal is ${store.goal.times} per ${store.goal.per}`}
         </Text>
-        <Button
-          title="Did it"
-          large
-          color="black"
-          buttonStyle={styles.buttonConfirmStyle}
-          onPress={() => this.onPressDidIt()}
-        />
+        <Text style={{ fontSize: 20, color: 'black' }}>
+          {`Done ${store.getTodayEvents()} times`}
+        </Text>
       </View>
     );
   }
 }
 
 const styles = {
+  buttons: {
+    flexDirection: 'row',
+    flex: 1,
+    justifyContent: 'space-around'
+  },
   containerStyle: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'space-around',
-    backgroundColor: 'white'
+    backgroundColor: 'white',
+    marginBottom: 40
   },
   buttonConfirmStyle: {
     backgroundColor: 'white',
-    width: 200,
+    width: 100,
     height: 55,
     borderColor: 'black',
     borderWidth: 1,

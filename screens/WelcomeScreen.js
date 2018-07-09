@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text } from 'react-native';
 import { Button } from 'react-native-elements';
-import Chart from '../components/chart';
 import store from '../mobx/Store';
 
 class WelcomeScreen extends Component {
@@ -14,7 +13,6 @@ class WelcomeScreen extends Component {
     return (
       <View style={styles.container}>
         <Text style={styles.text}> Welcome </Text>
-        <Chart />
         <View style={styles.buttonContainer}>
           <Button
             title="Add thing"

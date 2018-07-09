@@ -16,12 +16,12 @@
     "react-native-elements": "^0.19.1",
     "react-native-hide-with-keyboard": "^1.1.0",
     "react-native-storage": "^0.2.2",
-    "react-native-svg": "^6.3.1",
+    "react-native-svg": "^6.4.1",
+    "react-native-svg-charts": "^5.2.0",
     "react-native-vector-icons": "^4.6.0",
     "react-native-wheel-picker": "^1.2.0",
     "react-navigation": "^1.5.11",
-    "unstated": "^2.0.2",
-    "victory-native": "^0.17.4"
+    "unstated": "^2.0.2"
   },
   "devDependencies": {
     "babel-jest": "22.4.3",
