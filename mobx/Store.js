@@ -45,7 +45,7 @@ class Store {
   //event actions
   addEvent = date => this.events.push(date);
 
-  getLine = () => {
+  getGoal = () => {
     return this.goal.times;
   };
 

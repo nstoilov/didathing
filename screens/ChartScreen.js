@@ -16,6 +16,7 @@ class ChartScreen extends Component {
     const date = moment().format('YYYYMMDD');
     store.addEvent(date);
     store.getYesterdayEvents();
+    console.log(store.getGoal());
   }
 
   render() {
