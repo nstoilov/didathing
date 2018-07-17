@@ -1,4 +1,5 @@
 import { observable } from 'mobx';
+import { create, persist } from 'mobx-persist';
 import { AsyncStorage } from 'react-native';
 import moment from 'moment';
 
@@ -14,6 +15,7 @@ class Store {
     .subtract(3, 'days')
     .format('dddd');
 
+  @persist('object')
   @observable
   goal = {
     name: 'name',
@@ -21,7 +23,9 @@ class Store {
     per: 'day'
   };
 
-  @observable events = [];
+  @persist('list')
+  @observable
+  events = [];
 
   @observable
   chartLegends = [
@@ -62,6 +66,15 @@ class Store {
   };
 }
 
+const hydrate = create({
+  storage: AsyncStorage, // or AsyncStorage in react-native.
+  // default: localStorage
+  jsonify: true // if you use AsyncStorage, here shoud be true
+  // default: true
+});
+
 const store = new Store();
 
 export default store;
+
+hydrate('events', store).then(() => console.log('observable events hydrated'));

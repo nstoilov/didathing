@@ -4,7 +4,7 @@ import { observer } from 'mobx-react';
 import { Button } from 'react-native-elements';
 import moment from 'moment';
 import store from '../mobx/Store';
-import Chart from '../components/Chart';
+import Chart from '../components/chart';
 
 @observer
 class ChartScreen extends Component {
