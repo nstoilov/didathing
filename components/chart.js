@@ -29,14 +29,14 @@ export default class Chart extends Component {
       />
     );
 
-    const axesSvg = { fontSize: 20, fill: 'grey' };
+    const axesSvg = { fontSize: 15, fill: 'grey' };
     const verticalContentInset = { top: 10, bottom: 10 };
     const xAxisHeight = 30;
 
     return (
       <View
         style={{
-          width: 300,
+          width: 400,
           height: 200,
           padding: 20,
           flexDirection: 'row',

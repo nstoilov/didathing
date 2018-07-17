@@ -16,7 +16,7 @@ class ChartScreen extends Component {
     const date = moment().format('YYYYMMDD');
     store.addEvent(date);
     store.getYesterdayEvents();
-    console.log(store.getGoal());
+    console.log(store.events.slice().length);
   }
 
   render() {
@@ -30,6 +30,7 @@ class ChartScreen extends Component {
             buttonStyle={styles.buttonConfirmStyle}
             onPress={() => this.onPressEdit()}
           />
+
           <Button
             title="Did it"
             large
@@ -38,6 +39,7 @@ class ChartScreen extends Component {
             onPress={() => this.onPressDidIt()}
           />
         </View>
+
         <Chart />
         <Text style={{ fontSize: 20, color: 'black' }}>{`Thing is ${
           store.goal.name
