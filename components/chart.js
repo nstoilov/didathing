@@ -52,7 +52,7 @@ export default class Chart extends Component {
         />
         <View style={{ flex: 1, marginLeft: 10 }}>
           <BarChart
-            style={{ flex: 1 }}
+            style={{ marginLeft: 8, flex: 1 }}
             data={data}
             gridMax={2}
             contentInset={{ top: 10, bottom: 10 }}

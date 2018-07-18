@@ -19,6 +19,10 @@ class ChartScreen extends Component {
     console.log(store.events.slice().length);
   }
 
+  onPressReset() {
+    store.resetEvents();
+  }
+
   render() {
     return (
       <View style={styles.containerStyle}>
@@ -29,6 +33,13 @@ class ChartScreen extends Component {
             color="black"
             buttonStyle={styles.buttonConfirmStyle}
             onPress={() => this.onPressEdit()}
+          />
+          <Button
+            title="reset"
+            large
+            color="black"
+            buttonStyle={styles.buttonConfirmStyle}
+            onPress={() => this.onPressReset()}
           />
 
           <Button

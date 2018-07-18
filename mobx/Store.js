@@ -48,6 +48,7 @@ class Store {
 
   //event actions
   addEvent = date => this.events.push(date);
+  resetEvents = () => (this.events = []);
 
   getGoal = () => {
     return this.goal.times;
