@@ -64,14 +64,6 @@ class Store {
     this.chartMode = mode;
   };
 
-  setGoal = (key, item) => {
-    this.goal[key] = item;
-    console.log(this.goal.times);
-  };
-
-  addEvent = date => this.events.push(date);
-  resetEvents = () => (this.events = []);
-
   getChartLegends = () => {
     switch (this.chartMode) {
       case 'days':
@@ -86,22 +78,29 @@ class Store {
     }
   };
 
-  getTodayEvents = () => {
-    const result = this.events
-      .slice()
-      .filter(event => event === moment().format('YYYYMMDD'));
-    return result.slice().length;
+  setGoal = (key, item) => {
+    this.goal[key] = item;
+    console.log(this.goal.times);
   };
 
-  getYesterdayEvents = () => {
-    const result = this.events.slice().filter(
-      event =>
-        event ===
-        moment()
-          .subtract(0, 'days')
-          .format('YYYYMMDD')
-    );
-    return result.slice().length;
+  addEvent = date => this.events.push(date);
+
+  resetEvents = () => (this.events = []);
+
+  getChartEvents = () => {
+    switch (this.chartMode) {
+      case 'days':
+        return this.chartEventsDays;
+      case 'weeks':
+        console.log('this.chartEventsDays', this.chartEventsDays);
+        return this.chartEventsDays;
+      case 'months':
+        console.log('this.chartEventsDays', this.chartEventsDays);
+        return this.chartEventsDays;
+      default:
+        console.log('this.chartEventsDays', this.chartEventsDays);
+        return this.chartEventsDays;
+    }
   };
 
   getEvents = (minus, period) => {
@@ -112,6 +111,7 @@ class Store {
           .subtract(minus, period)
           .format('YYYYMMDD')
     );
+    console.log('result.slice().length', result.slice().length);
     return result.slice().length;
   };
 }

@@ -15,8 +15,6 @@ class ChartScreen extends Component {
   onPressDidIt() {
     const date = moment().format('YYYYMMDD');
     store.addEvent(date);
-    store.getYesterdayEvents();
-    console.log(store.events.slice().length);
   }
 
   onPressReset() {
@@ -95,7 +93,7 @@ class ChartScreen extends Component {
           {`Goal is ${store.goal.times} per ${store.goal.per}`}
         </Text>
         <Text style={{ fontSize: 20, color: 'black' }}>
-          {`Done ${store.getTodayEvents()} times`}
+          {`Done ${store.getEvents(0, 'days')} times`}
         </Text>
       </View>
     );
