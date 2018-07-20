@@ -9,7 +9,7 @@ const PickerItem = Picker.Item;
 @observer
 class WheelPicker extends Component {
   state = {
-    selectedItem: 0,
+    selectedItem: store.goal.times,
     itemList: ['0', '1', '2']
   };
 

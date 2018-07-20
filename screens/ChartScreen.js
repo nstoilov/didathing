@@ -23,6 +23,18 @@ class ChartScreen extends Component {
     store.resetEvents();
   }
 
+  onPressDays() {
+    store.changeMode('days');
+  }
+
+  onPressWeeks() {
+    store.changeMode('weeks');
+  }
+
+  onPressMonths() {
+    store.changeMode('months');
+  }
+
   render() {
     return (
       <View style={styles.containerStyle}>
@@ -48,6 +60,30 @@ class ChartScreen extends Component {
             color="black"
             buttonStyle={styles.buttonConfirmStyle}
             onPress={() => this.onPressDidIt()}
+          />
+        </View>
+        <View style={styles.buttons}>
+          <Button
+            title="Days"
+            large
+            color="black"
+            buttonStyle={styles.buttonConfirmStyle}
+            onPress={() => this.onPressDays()}
+          />
+          <Button
+            title="Weeks"
+            large
+            color="black"
+            buttonStyle={styles.buttonConfirmStyle}
+            onPress={() => this.onPressWeeks()}
+          />
+
+          <Button
+            title="Months"
+            large
+            color="black"
+            buttonStyle={styles.buttonConfirmStyle}
+            onPress={() => this.onPressMonths()}
           />
         </View>
 

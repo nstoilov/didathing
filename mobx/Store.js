@@ -4,17 +4,6 @@ import { AsyncStorage } from 'react-native';
 import moment from 'moment';
 
 class Store {
-  today = moment().format('YYYYMMDD');
-  yesterday = moment()
-    .subtract(1, 'days')
-    .format('YYYYMMDD');
-  todayMinus3 = moment()
-    .subtract(2, 'days')
-    .format('dddd');
-  todayMinus4 = moment()
-    .subtract(3, 'days')
-    .format('dddd');
-
   @persist('object')
   @observable
   goal = {
@@ -27,18 +16,52 @@ class Store {
   @observable
   events = [];
 
+  @persist
   @observable
-  chartLegends = [
-    this.todayMinus4.slice(0, 3),
-    this.todayMinus3.slice(0, 3),
+  chartMode = 'days';
+
+  @observable
+  chartLegendsDays = [
+    moment()
+      .subtract(3, 'days')
+      .format('dddd'),
+    moment()
+      .subtract(2, 'days')
+      .format('dddd'),
     'Yday',
     'Today'
   ];
 
-  @observable todayEvents = this.getTodayEvents();
+  @observable
+  chartLegendsWeeks = [
+    `week ${moment()
+      .subtract(3, 'weeks')
+      .week()}`,
+    `week ${moment()
+      .subtract(2, 'weeks')
+      .week()}`,
+    'Last week',
+    'This week'
+  ];
+
+  @observable
+  chartLegendsMonths = [
+    moment()
+      .subtract(3, 'months')
+      .format('MMMM'),
+    moment()
+      .subtract(2, 'months')
+      .format('MMMM'),
+    'Last month',
+    'This month'
+  ];
 
   saveReturnUserToken = () => {
     AsyncStorage.setItem('token', 'true');
+  };
+
+  changeMode = mode => {
+    this.chartMode = mode;
   };
 
   setGoal = (key, item) => {
@@ -46,23 +69,49 @@ class Store {
     console.log(this.goal.times);
   };
 
-  //event actions
   addEvent = date => this.events.push(date);
   resetEvents = () => (this.events = []);
 
-  getGoal = () => {
-    return this.goal.times;
+  getChartLegends = () => {
+    switch (this.chartMode) {
+      case 'days':
+        return this.chartLegendsDays;
+      case 'weeks':
+        return this.chartLegendsWeeks;
+      case 'months':
+        return this.chartLegendsMonths;
+      default:
+        console.log(this.chartMode);
+        return this.chartLegendsDays;
+    }
   };
 
   getTodayEvents = () => {
-    const result = this.events.slice().filter(event => event === this.today);
+    const result = this.events
+      .slice()
+      .filter(event => event === moment().format('YYYYMMDD'));
     return result.slice().length;
   };
 
   getYesterdayEvents = () => {
-    const result = this.events
-      .slice()
-      .filter(event => event === this.yesterday);
+    const result = this.events.slice().filter(
+      event =>
+        event ===
+        moment()
+          .subtract(0, 'days')
+          .format('YYYYMMDD')
+    );
+    return result.slice().length;
+  };
+
+  getEvents = (minus, period) => {
+    const result = this.events.slice().filter(
+      event =>
+        event ===
+        moment()
+          .subtract(minus, period)
+          .format('YYYYMMDD')
+    );
     return result.slice().length;
   };
 }

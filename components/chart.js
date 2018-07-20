@@ -8,14 +8,15 @@ import store from '../mobx/Store';
 @observer
 export default class Chart extends Component {
   render() {
-    // const fill = 'grey';
-    const todayEvents = store.getTodayEvents();
-    const ydayEvents = store.getYesterdayEvents();
-    const data = [3, 5, ydayEvents, todayEvents];
-    const chartLegends = store.chartLegends;
-    const lineY = store.getGoal();
-    //const yData = [lineY];
-    //  const keys = ['1', '2', '3', '4'];
+    const data = [
+      store.getEvents(3, 'days'),
+      store.getEvents(2, 'days'),
+      store.getEvents(1, 'days'),
+      store.getEvents(0, 'days')
+    ];
+    const chartLegends = store.getChartLegends();
+    const lineY = store.goal.times;
+
     const HorizontalLine = ({ y }) => (
       <Line
         key={'goal'}
