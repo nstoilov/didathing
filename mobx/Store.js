@@ -16,6 +16,16 @@ class Store {
   @observable
   events = [];
 
+  getChartEvents = () => {
+    const result = [
+      this.getEvents(3, 'days'),
+      this.getEvents(2, 'days'),
+      this.getEvents(1, 'days'),
+      this.getEvents(0, 'days')
+    ];
+    return result;
+  };
+
   @persist
   @observable
   chartMode = 'days';
@@ -87,6 +97,7 @@ class Store {
 
   resetEvents = () => (this.events = []);
 
+  /*
   getChartEvents = () => {
     switch (this.chartMode) {
       case 'days':
@@ -102,7 +113,7 @@ class Store {
         return this.chartEventsDays;
     }
   };
-
+*/
   getEvents = (minus, period) => {
     const result = this.events.slice().filter(
       event =>

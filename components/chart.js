@@ -8,12 +8,7 @@ import store from '../mobx/Store';
 @observer
 export default class Chart extends Component {
   render() {
-    const data = [
-      store.getEvents(3, 'days'),
-      store.getEvents(2, 'days'),
-      store.getEvents(1, 'days'),
-      store.getEvents(0, 'days')
-    ];
+    const data = store.getChartEvents();
     const chartLegends = store.getChartLegends();
     const lineY = store.goal.times;
 
