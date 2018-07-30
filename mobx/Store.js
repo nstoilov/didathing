@@ -74,6 +74,59 @@ class Store {
     this.goal[key] = item;
   };
 
+  getGoal = () => {
+    switch (this.chartMode) {
+      case 'days':
+        console.log(this.goal.times);
+        return Math.round(this.calculateGoalDays());
+      case 'weeks':
+        return Math.round(this.calculateGoalWeeks());
+      case 'months':
+        return Math.round(this.calculateGoalMonths());
+      default:
+        return Math.round(this.calculateGoalDays());
+    }
+  };
+
+  calculateGoalDays = () => {
+    switch (this.goal.per) {
+      case 'day':
+        return this.goal.times;
+      case 'week':
+        return this.goal.times / 7;
+      case 'month':
+        return this.goal.times / 30;
+      default:
+        return this.goal.times;
+    }
+  };
+
+  calculateGoalWeeks = () => {
+    switch (this.goal.per) {
+      case 'day':
+        return this.goal.times * 7;
+      case 'week':
+        return this.goal.times;
+      case 'month':
+        return this.goal.times / 4;
+      default:
+        return this.goal.times;
+    }
+  };
+
+  calculateGoalMonths = () => {
+    switch (this.goal.per) {
+      case 'day':
+        return this.goal.times * 30;
+      case 'week':
+        return this.goal.times * 4;
+      case 'month':
+        return this.goal.times;
+      default:
+        return this.goal.times;
+    }
+  };
+
   addEvent = event => this.events.push(event);
 
   resetEvents = () => (this.events = []);

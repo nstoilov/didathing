@@ -10,7 +10,8 @@ export default class Chart extends Component {
   render() {
     const data = store.getChartEvents();
     const chartLegends = store.getChartLegends();
-    const lineY = store.goal.times;
+    //  const lineY = store.goal.times;
+    const lineY = store.getGoal();
     const screenWidth = Dimensions.get('window').width;
 
     const HorizontalLine = ({ y }) => (
@@ -19,19 +20,13 @@ export default class Chart extends Component {
           key={'goal'}
           x1={'5%'}
           x2={'100%'}
-          y={y(lineY)}
+          y1={y(lineY)}
+          y2={y(lineY)}
           stroke={'grey'}
           strokeDasharray={[4, 8]}
           strokeWidth={2}
         />
-        <Text
-          //  x1={'50%'}
-          //x2={'0%'}
-          x={'0%'}
-          y={y(lineY)}
-          // textAnchor="mi"
-          fontSize="20"
-        >
+        <Text x={'0%'} y={y(lineY)} fontSize="20">
           {lineY}
         </Text>
       </G>
