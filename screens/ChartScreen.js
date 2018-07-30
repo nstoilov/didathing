@@ -13,8 +13,14 @@ class ChartScreen extends Component {
   };
 
   onPressDidIt() {
-    const date = moment().format('YYYYMMDD');
-    store.addEvent(date);
+    // const date = moment().format('YYYYMMDD');
+    const event = {
+      date: moment().format('YYYYMMDD'),
+      week: moment().week(),
+      month: moment().format('MMM')
+    };
+    //  console.log('testDate', testDate.week, testDate.month, testDate.date);
+    store.addEvent(event);
   }
 
   onPressReset() {
@@ -93,7 +99,7 @@ class ChartScreen extends Component {
           {`Goal is ${store.goal.times} per ${store.goal.per}`}
         </Text>
         <Text style={{ fontSize: 20, color: 'black' }}>
-          {`Done ${store.getEvents(0, 'days')} times`}
+          {`Done ${store.getEventsDays(0)} times`}
         </Text>
       </View>
     );

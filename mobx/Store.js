@@ -15,15 +15,59 @@ class Store {
   @persist('list')
   @observable
   events = [];
-
+  /*
   getChartEvents = () => {
     const result = [
-      this.getEvents(3, 'days'),
-      this.getEvents(2, 'days'),
-      this.getEvents(1, 'days'),
-      this.getEvents(0, 'days')
+      this.getEventsDays(3),
+      this.getEventsDays(2),
+      this.getEventsDays(1),
+      this.getEventsDays(0)
     ];
     return result;
+  };
+
+
+  getChartEventsOld = () => {
+    switch (this.chartMode) {
+      case 'days':
+        return [
+          this.getEventsDays(3),
+          this.getEventsDays(2),
+          this.getEventsDays(1),
+          this.getEventsDays(0)
+        ];
+      case 'weeks':
+        return [
+          this.getEventsWeeks(3),
+          this.getEventsWeeks(2),
+          this.getEventsWeeks(1),
+          this.getEventsWeeks(0)
+        ];
+      case 'months':
+        return [
+          this.getEventsMonths(3),
+          this.getEventsMonths(2),
+          this.getEventsMonths(1),
+          this.getEventsMonths(0)
+        ];
+      default:
+        return [];
+    }
+  };
+  */
+
+  getChartEvents = () => {
+    const data = [3, 2, 1, 0];
+    switch (this.chartMode) {
+      case 'days':
+        return data.map(x => this.getEventsDays(x));
+      case 'weeks':
+        return data.map(x => this.getEventsWeeks(x));
+      case 'months':
+        return data.map(x => this.getEventsMonths(x));
+      default:
+        return [];
+    }
   };
 
   @persist
@@ -83,7 +127,6 @@ class Store {
       case 'months':
         return this.chartLegendsMonths;
       default:
-        console.log(this.chartMode);
         return this.chartLegendsDays;
     }
   };
@@ -93,34 +136,39 @@ class Store {
     console.log(this.goal.times);
   };
 
-  addEvent = date => this.events.push(date);
+  addEvent = event => this.events.push(event);
 
   resetEvents = () => (this.events = []);
 
-  /*
-  getChartEvents = () => {
-    switch (this.chartMode) {
-      case 'days':
-        return this.chartEventsDays;
-      case 'weeks':
-        console.log('this.chartEventsDays', this.chartEventsDays);
-        return this.chartEventsDays;
-      case 'months':
-        console.log('this.chartEventsDays', this.chartEventsDays);
-        return this.chartEventsDays;
-      default:
-        console.log('this.chartEventsDays', this.chartEventsDays);
-        return this.chartEventsDays;
-    }
-  };
-*/
-  getEvents = (minus, period) => {
+  getEventsDays = minus => {
     const result = this.events.slice().filter(
       event =>
-        event ===
+        event.date ===
         moment()
-          .subtract(minus, period)
+          .subtract(minus, 'days')
           .format('YYYYMMDD')
+    );
+    return result.slice().length;
+  };
+
+  getEventsWeeks = minus => {
+    const result = this.events.slice().filter(
+      event =>
+        event.week ===
+        moment()
+          .subtract(minus, 'weeks')
+          .week()
+    );
+    return result.slice().length;
+  };
+
+  getEventsMonths = minus => {
+    const result = this.events.slice().filter(
+      event =>
+        event.month ===
+        moment()
+          .subtract(minus, 'months')
+          .format('MMM')
     );
     console.log('result.slice().length', result.slice().length);
     return result.slice().length;
