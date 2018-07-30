@@ -4,6 +4,10 @@ import { AsyncStorage } from 'react-native';
 import moment from 'moment';
 
 class Store {
+  @persist
+  @observable
+  token = false;
+
   @persist('object')
   @observable
   goal = {
@@ -15,60 +19,6 @@ class Store {
   @persist('list')
   @observable
   events = [];
-  /*
-  getChartEvents = () => {
-    const result = [
-      this.getEventsDays(3),
-      this.getEventsDays(2),
-      this.getEventsDays(1),
-      this.getEventsDays(0)
-    ];
-    return result;
-  };
-
-
-  getChartEventsOld = () => {
-    switch (this.chartMode) {
-      case 'days':
-        return [
-          this.getEventsDays(3),
-          this.getEventsDays(2),
-          this.getEventsDays(1),
-          this.getEventsDays(0)
-        ];
-      case 'weeks':
-        return [
-          this.getEventsWeeks(3),
-          this.getEventsWeeks(2),
-          this.getEventsWeeks(1),
-          this.getEventsWeeks(0)
-        ];
-      case 'months':
-        return [
-          this.getEventsMonths(3),
-          this.getEventsMonths(2),
-          this.getEventsMonths(1),
-          this.getEventsMonths(0)
-        ];
-      default:
-        return [];
-    }
-  };
-  */
-
-  getChartEvents = () => {
-    const data = [3, 2, 1, 0];
-    switch (this.chartMode) {
-      case 'days':
-        return data.map(x => this.getEventsDays(x));
-      case 'weeks':
-        return data.map(x => this.getEventsWeeks(x));
-      case 'months':
-        return data.map(x => this.getEventsMonths(x));
-      default:
-        return [];
-    }
-  };
 
   @persist
   @observable
@@ -82,7 +32,7 @@ class Store {
     moment()
       .subtract(2, 'days')
       .format('dddd'),
-    'Yday',
+    'Yesterday',
     'Today'
   ];
 
@@ -106,13 +56,27 @@ class Store {
     moment()
       .subtract(2, 'months')
       .format('MMMM'),
-    'Last month',
-    'This month'
+    moment()
+      .subtract(1, 'months')
+      .format('MMMM'),
+    moment().format('MMMM')
   ];
 
   saveReturnUserToken = () => {
     AsyncStorage.setItem('token', 'true');
   };
+
+  saveReturnUserTokenNew = () => {
+    this.token = true;
+  };
+
+  setGoal = (key, item) => {
+    this.goal[key] = item;
+  };
+
+  addEvent = event => this.events.push(event);
+
+  resetEvents = () => (this.events = []);
 
   changeMode = mode => {
     this.chartMode = mode;
@@ -131,14 +95,19 @@ class Store {
     }
   };
 
-  setGoal = (key, item) => {
-    this.goal[key] = item;
-    console.log(this.goal.times);
+  getChartEvents = () => {
+    const data = [3, 2, 1, 0];
+    switch (this.chartMode) {
+      case 'days':
+        return data.map(x => this.getEventsDays(x));
+      case 'weeks':
+        return data.map(x => this.getEventsWeeks(x));
+      case 'months':
+        return data.map(x => this.getEventsMonths(x));
+      default:
+        return [];
+    }
   };
-
-  addEvent = event => this.events.push(event);
-
-  resetEvents = () => (this.events = []);
 
   getEventsDays = minus => {
     const result = this.events.slice().filter(

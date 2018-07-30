@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { View } from 'react-native';
+import { View, Dimensions } from 'react-native';
 import { observer } from 'mobx-react';
-import { BarChart, XAxis, YAxis, Grid } from 'react-native-svg-charts';
-import { Line } from 'react-native-svg';
+import { BarChart, XAxis } from 'react-native-svg-charts';
+import { Line, G, Text } from 'react-native-svg';
 import store from '../mobx/Store';
 
 @observer
@@ -11,57 +11,83 @@ export default class Chart extends Component {
     const data = store.getChartEvents();
     const chartLegends = store.getChartLegends();
     const lineY = store.goal.times;
+    const screenWidth = Dimensions.get('window').width;
 
     const HorizontalLine = ({ y }) => (
-      <Line
-        key={'goal'}
-        x1={'0%'}
-        x2={'100%'}
-        y1={y(lineY)}
-        y2={y(lineY)}
-        stroke={'grey'}
-        strokeDasharray={[4, 8]}
-        strokeWidth={2}
-      />
+      <G>
+        <Line
+          key={'goal'}
+          x1={'5%'}
+          x2={'100%'}
+          y={y(lineY)}
+          stroke={'grey'}
+          strokeDasharray={[4, 8]}
+          strokeWidth={2}
+        />
+        <Text
+          //  x1={'50%'}
+          //x2={'0%'}
+          x={'0%'}
+          y={y(lineY)}
+          // textAnchor="mi"
+          fontSize="20"
+        >
+          {lineY}
+        </Text>
+      </G>
     );
 
-    const axesSvg = { fontSize: 15, fill: 'grey' };
-    const verticalContentInset = { top: 10, bottom: 10 };
+    const CUT_OFF = 20;
+    const Labels = ({ x, y, bandwidth, data }) =>
+      data.map((value, index) => (
+        <Text
+          key={index}
+          x={x(index) + bandwidth / 2}
+          y={value < CUT_OFF ? y(value) - 10 : y(value) + 15}
+          fontSize={20}
+          fill={value >= CUT_OFF ? 'white' : 'black'}
+          alignmentBaseline={'middle'}
+          textAnchor={'middle'}
+        >
+          {value}
+        </Text>
+      ));
+
+    const axesSvg = { fontSize: 18, fill: 'black' };
+    //const verticalContentInset = { top: 10, bottom: 10 };
     const xAxisHeight = 30;
 
     return (
       <View
         style={{
-          width: 400,
-          height: 200,
-          padding: 20,
+          width: screenWidth,
+          marginLeft: 10,
+          marginRight: 10,
           flexDirection: 'row',
           flex: 1
         }}
       >
-        <YAxis
-          data={data}
-          style={{ marginBottom: xAxisHeight }}
-          contentInset={verticalContentInset}
-          svg={axesSvg}
-          numberOfTicks={5}
-        />
-        <View style={{ flex: 1, marginLeft: 10 }}>
+        <View style={{ flex: 1, marginLeft: 0, marginRight: 10 }}>
           <BarChart
-            style={{ marginLeft: 8, flex: 1 }}
+            style={{ marginHorizontal: 20, flex: 1 }}
             data={data}
             gridMax={2}
-            contentInset={{ top: 10, bottom: 10 }}
+            contentInset={{ top: 20, bottom: 20, left: 10, right: 10 }}
+            // spacing={0.4}
+            spacingInner={0.6}
             svg={{ stroke: 'rgb(134, 65, 244)' }}
           >
-            <Grid />
+            <Labels />
             <HorizontalLine />
           </BarChart>
           <XAxis
-            style={{ marginHorizontal: -10, height: xAxisHeight }}
+            style={{
+              marginHorizontal: 10,
+              height: xAxisHeight
+            }}
             data={data}
             formatLabel={(value, index) => chartLegends[index]}
-            contentInset={{ left: 10, right: 10 }}
+            contentInset={{ left: 40, right: 50 }}
             svg={axesSvg}
           />
         </View>
