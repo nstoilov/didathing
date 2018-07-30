@@ -77,14 +77,13 @@ class Store {
   getGoal = () => {
     switch (this.chartMode) {
       case 'days':
-        console.log(this.goal.times);
-        return Math.round(this.calculateGoalDays());
+        return Math.round(this.calculateGoalDays() * 10) / 10;
       case 'weeks':
-        return Math.round(this.calculateGoalWeeks());
+        return Math.round(this.calculateGoalWeeks() * 10) / 10;
       case 'months':
-        return Math.round(this.calculateGoalMonths());
+        return Math.round(this.calculateGoalMonths() * 10) / 10;
       default:
-        return Math.round(this.calculateGoalDays());
+        return Math.round(this.calculateGoalDays() * 10) / 10;
     }
   };
 

@@ -18,7 +18,7 @@ export default class Chart extends Component {
       <G>
         <Line
           key={'goal'}
-          x1={'5%'}
+          x1={'7%'}
           x2={'100%'}
           y1={y(lineY)}
           y2={y(lineY)}
@@ -26,7 +26,7 @@ export default class Chart extends Component {
           strokeDasharray={[4, 8]}
           strokeWidth={2}
         />
-        <Text x={'0%'} y={y(lineY)} fontSize="20">
+        <Text x={'0%'} y={y(lineY)} fontSize="17">
           {lineY}
         </Text>
       </G>
@@ -64,10 +64,10 @@ export default class Chart extends Component {
       >
         <View style={{ flex: 1, marginLeft: 0, marginRight: 10 }}>
           <BarChart
-            style={{ marginHorizontal: 20, flex: 1 }}
+            style={{ marginHorizontal: 10, flex: 1 }}
             data={data}
             gridMax={2}
-            contentInset={{ top: 20, bottom: 20, left: 10, right: 10 }}
+            contentInset={{ top: 20, bottom: 20, left: 30, right: 10 }}
             // spacing={0.4}
             spacingInner={0.6}
             svg={{ stroke: 'rgb(134, 65, 244)' }}
@@ -82,7 +82,7 @@ export default class Chart extends Component {
             }}
             data={data}
             formatLabel={(value, index) => chartLegends[index]}
-            contentInset={{ left: 40, right: 50 }}
+            contentInset={{ left: 50, right: 50 }}
             svg={axesSvg}
           />
         </View>
