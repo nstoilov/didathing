@@ -10,7 +10,7 @@ const PickerItem = Picker.Item;
 class TimePicker extends Component {
   state = {
     selectedItem: 1,
-    itemList: ['day', 'week', 'month']
+    itemList: ['day', 'week', 'month', 'year']
   };
 
   onPickerSelect(index) {

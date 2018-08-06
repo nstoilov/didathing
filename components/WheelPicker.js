@@ -10,7 +10,7 @@ const PickerItem = Picker.Item;
 class WheelPicker extends Component {
   state = {
     selectedItem: store.goal.times,
-    itemList: ['1', '2', '5', '10', '20', '50']
+    itemList: ['1', '2', '5', '10', '20', '50', '100']
   };
 
   onPickerSelect(index) {

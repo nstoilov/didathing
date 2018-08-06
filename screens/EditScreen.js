@@ -37,7 +37,7 @@ class EditScreen extends Component {
               title="Done"
               large
               color="black"
-              buttonStyle={styles.buttonConfirmStyle}
+              buttonStyle={styles.buttonStyle}
               onPress={this.OnPress}
             />
           </View>
@@ -48,15 +48,6 @@ class EditScreen extends Component {
 }
 
 const styles = {
-  inputStyle: {
-    fontSize: 30,
-    textAlign: 'center',
-    marginLeft: 40,
-    marginRight: 40,
-    paddingBottom: 10,
-    paddingRight: 5,
-    paddingLeft: 5
-  },
   containerStyle: {
     flex: 1,
     flexDirection: 'column',
@@ -69,24 +60,35 @@ const styles = {
     textAlign: 'center',
     fontSize: 30
   },
+  inputStyle: {
+    fontSize: 30,
+    textAlign: 'center',
+    marginLeft: 40,
+    marginRight: 40,
+    paddingBottom: 10,
+    paddingRight: 5,
+    paddingLeft: 5
+  },
+
   buttonContainerStyle: {
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
     marginTop: 40
   },
-  buttonConfirmStyle: {
+  buttonStyle: {
     backgroundColor: 'white',
-    width: 200,
+    width: 300,
     height: 55,
-    borderColor: 'black',
+    borderColor: 'grey',
     borderWidth: 1,
     borderRadius: 20
   },
   textStyle: {
     textAlign: 'center',
     fontSize: 24,
-    color: 'black'
+    color: 'black',
+    marginLeft: 10
   }
 };
 

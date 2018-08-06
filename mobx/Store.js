@@ -63,10 +63,6 @@ class Store {
   ];
 
   saveReturnUserToken = () => {
-    AsyncStorage.setItem('token', 'true');
-  };
-
-  saveReturnUserTokenNew = () => {
     this.token = true;
   };
 
@@ -87,6 +83,19 @@ class Store {
     }
   };
 
+  getIndex = () => {
+    switch (this.chartMode) {
+      case 'days':
+        return 0;
+      case 'weeks':
+        return 1;
+      case 'months':
+        return 2;
+      default:
+        return 0;
+    }
+  };
+
   calculateGoalDays = () => {
     switch (this.goal.per) {
       case 'day':
@@ -95,6 +104,8 @@ class Store {
         return this.goal.times / 7;
       case 'month':
         return this.goal.times / 30;
+      case 'year':
+        return this.goal.times / 365;
       default:
         return this.goal.times;
     }
@@ -108,6 +119,8 @@ class Store {
         return this.goal.times;
       case 'month':
         return this.goal.times / 4;
+      case 'year':
+        return this.goal.times / 52;
       default:
         return this.goal.times;
     }
@@ -121,6 +134,8 @@ class Store {
         return this.goal.times * 4;
       case 'month':
         return this.goal.times;
+      case 'year':
+        return this.goal.times / 12;
       default:
         return this.goal.times;
     }
@@ -129,6 +144,8 @@ class Store {
   addEvent = event => this.events.push(event);
 
   resetEvents = () => (this.events = []);
+
+  undoEvent = () => (this.events = this.events.slice(0, -1));
 
   changeMode = mode => {
     this.chartMode = mode;

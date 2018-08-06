@@ -9,7 +9,7 @@ import Chart from '../components/chart';
 @observer
 class ChartScreen extends Component {
   state = {
-    selectedIndex: 2
+    selectedIndex: store.getIndex()
   };
 
   onPressEdit = () => {
@@ -27,6 +27,10 @@ class ChartScreen extends Component {
 
   onPressReset() {
     store.resetEvents();
+  }
+
+  onPressUndo() {
+    store.undoEvent();
   }
 
   updateIndex = selectedIndex => {
@@ -55,35 +59,28 @@ class ChartScreen extends Component {
     const { selectedIndex } = this.state;
     return (
       <View style={styles.containerStyle}>
-        <View style={styles.buttons}>
+        <View style={styles.buttonsContainerTopStyle}>
           <Button
-            title="edit"
-            large
+            title="Edit"
             color="black"
-            buttonStyle={styles.buttonConfirmStyle}
+            buttonStyle={styles.buttonTopStyle}
             onPress={() => this.onPressEdit()}
           />
           <Button
-            title="reset"
-            large
+            title="Clear All Data"
             color="black"
-            buttonStyle={styles.buttonConfirmStyle}
+            buttonStyle={styles.buttonTopStyle}
             onPress={() => this.onPressReset()}
           />
-
           <Button
-            title="Did it"
-            large
+            title="Undo"
             color="black"
-            buttonStyle={styles.buttonConfirmStyle}
-            onPress={() => this.onPressDidIt()}
+            buttonStyle={styles.buttonTopStyle}
+            onPress={() => this.onPressUndo()}
           />
         </View>
-
-        <Text style={{ fontSize: 40, color: 'black', textAlign: 'center' }}>
-          {store.goal.name}
-        </Text>
-        <Text style={{ fontSize: 20, color: 'black', textAlign: 'center' }}>
+        <Text style={styles.titleStyle}>{store.goal.name}</Text>
+        <Text style={styles.subtitleStyle}>
           {`Goal: ${store.goal.times} per ${store.goal.per}`}
         </Text>
         <Chart />
@@ -93,28 +90,67 @@ class ChartScreen extends Component {
           buttons={buttons}
           containerBorderRadius={20}
         />
+        <View style={styles.buttonsContainerBottomStyle}>
+          <Button
+            title="Did it"
+            large
+            color="black"
+            buttonStyle={styles.buttonBottomStyle}
+            onPress={() => this.onPressDidIt()}
+          />
+        </View>
       </View>
     );
   }
 }
 
 const styles = {
-  buttons: {
+  titleStyle: {
+    fontSize: 40,
+    color: 'black',
+    textAlign: 'center',
+    marginBottom: 10
+  },
+  subtitleStyle: {
+    fontSize: 20,
+    color: 'black',
+    textAlign: 'center',
+    marginBottom: 40
+  },
+  buttonsContainerTopStyle: {
     flexDirection: 'row',
     flex: 1,
-    justifyContent: 'space-around'
+    justifyContent: 'center',
+    alignItems: 'flex-start'
+  },
+  buttonsContainerBottomStyle: {
+    flexDirection: 'row',
+    flex: 1,
+    justifyContent: 'space-around',
+    alignItems: 'flex-end'
   },
   containerStyle: {
     flex: 1,
     backgroundColor: 'white',
-    marginBottom: 40
+    marginBottom: 10
   },
-  buttonConfirmStyle: {
+  buttonTopStyle: {
     backgroundColor: 'white',
-    width: 100,
-    height: 55,
-    borderColor: 'black',
+    //  width: 200,
+    // height: 55,
+    borderColor: 'grey',
+    paddingVertical: 3,
     borderWidth: 1,
+    borderRadius: 15,
+    marginBottom: 10,
+    marginTop: 10
+  },
+  buttonBottomStyle: {
+    backgroundColor: 'white',
+    width: 300,
+    height: 55,
+    borderColor: 'grey',
+    borderWidth: 2,
     borderRadius: 20,
     marginBottom: 10,
     marginTop: 10
