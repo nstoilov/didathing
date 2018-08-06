@@ -1,15 +1,17 @@
 import React, { Component } from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, TouchableOpacity } from 'react-native';
 import { observer } from 'mobx-react';
 import { Button, ButtonGroup } from 'react-native-elements';
 import moment from 'moment';
+import Modal from 'react-native-modal';
 import store from '../mobx/Store';
 import Chart from '../components/chart';
 
 @observer
 class ChartScreen extends Component {
   state = {
-    selectedIndex: store.getIndex()
+    selectedIndex: store.getIndex(),
+    isModalVisible: false
   };
 
   onPressEdit = () => {
@@ -25,13 +27,18 @@ class ChartScreen extends Component {
     store.addEvent(event);
   }
 
-  onPressReset() {
-    store.resetEvents();
-  }
-
   onPressUndo() {
     store.undoEvent();
   }
+
+  onModalConfirm = () => {
+    store.clearEvents();
+    this.setState({ isModalVisible: !this.state.isModalVisible });
+  };
+
+  toggleModal = () => {
+    this.setState({ isModalVisible: !this.state.isModalVisible });
+  };
 
   updateIndex = selectedIndex => {
     this.setState({ selectedIndex });
@@ -58,46 +65,63 @@ class ChartScreen extends Component {
     ];
     const { selectedIndex } = this.state;
     return (
-      <View style={styles.containerStyle}>
-        <View style={styles.buttonsContainerTopStyle}>
-          <Button
-            title="Edit"
-            color="black"
-            buttonStyle={styles.buttonTopStyle}
-            onPress={() => this.onPressEdit()}
+      <View style={styles.modalStyle}>
+        <TouchableOpacity onPress={this.toggleModal}>
+          <Text>Show Modal</Text>
+        </TouchableOpacity>
+        <Modal isVisible={this.state.isModalVisible}>
+          <View style={styles.modalStyle}>
+            <Text>Are you sure?</Text>
+            <TouchableOpacity onPress={this.onModalConfirm}>
+              <Text>Yes</Text>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={this.toggleModal}>
+              <Text>No</Text>
+            </TouchableOpacity>
+          </View>
+        </Modal>
+
+        <View style={styles.containerStyle}>
+          <View style={styles.buttonsContainerTopStyle}>
+            <Button
+              title="Edit"
+              color="black"
+              buttonStyle={styles.buttonTopStyle}
+              onPress={() => this.onPressEdit()}
+            />
+            <Button
+              title="Clear All Data"
+              color="black"
+              buttonStyle={styles.buttonTopStyle}
+              onPress={this.toggleModal}
+            />
+            <Button
+              title="Undo"
+              color="black"
+              buttonStyle={styles.buttonTopStyle}
+              onPress={() => this.onPressUndo()}
+            />
+          </View>
+          <Text style={styles.titleStyle}>{store.goal.name}</Text>
+          <Text style={styles.subtitleStyle}>
+            {`Goal: ${store.goal.times} per ${store.goal.per}`}
+          </Text>
+          <Chart />
+          <ButtonGroup
+            onPress={this.updateIndex}
+            selectedIndex={selectedIndex}
+            buttons={buttons}
+            containerBorderRadius={20}
           />
-          <Button
-            title="Clear All Data"
-            color="black"
-            buttonStyle={styles.buttonTopStyle}
-            onPress={() => this.onPressReset()}
-          />
-          <Button
-            title="Undo"
-            color="black"
-            buttonStyle={styles.buttonTopStyle}
-            onPress={() => this.onPressUndo()}
-          />
-        </View>
-        <Text style={styles.titleStyle}>{store.goal.name}</Text>
-        <Text style={styles.subtitleStyle}>
-          {`Goal: ${store.goal.times} per ${store.goal.per}`}
-        </Text>
-        <Chart />
-        <ButtonGroup
-          onPress={this.updateIndex}
-          selectedIndex={selectedIndex}
-          buttons={buttons}
-          containerBorderRadius={20}
-        />
-        <View style={styles.buttonsContainerBottomStyle}>
-          <Button
-            title="Did it"
-            large
-            color="black"
-            buttonStyle={styles.buttonBottomStyle}
-            onPress={() => this.onPressDidIt()}
-          />
+          <View style={styles.buttonsContainerBottomStyle}>
+            <Button
+              title="Did it"
+              large
+              color="black"
+              buttonStyle={styles.buttonBottomStyle}
+              onPress={() => this.onPressDidIt()}
+            />
+          </View>
         </View>
       </View>
     );
@@ -105,6 +129,9 @@ class ChartScreen extends Component {
 }
 
 const styles = {
+  modalStyle: {
+    flex: 1
+  },
   titleStyle: {
     fontSize: 40,
     color: 'black',

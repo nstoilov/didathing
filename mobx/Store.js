@@ -36,6 +36,8 @@ class Store {
     'Today'
   ];
 
+  @observable modalVisible = false;
+
   @observable
   chartLegendsWeeks = [
     `week ${moment()
@@ -61,6 +63,10 @@ class Store {
       .format('MMMM'),
     moment().format('MMMM')
   ];
+
+  toggleModal = () => {
+    this.modalVisible = !this.modalVisible;
+  };
 
   saveReturnUserToken = () => {
     this.token = true;
@@ -143,7 +149,7 @@ class Store {
 
   addEvent = event => this.events.push(event);
 
-  resetEvents = () => (this.events = []);
+  clearEvents = () => (this.events = []);
 
   undoEvent = () => (this.events = this.events.slice(0, -1));
 

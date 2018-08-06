@@ -17,6 +17,7 @@
     "react-native": "0.55.2",
     "react-native-elements": "^0.19.1",
     "react-native-hide-with-keyboard": "^1.1.0",
+    "react-native-modal": "^6.5.0",
     "react-native-storage": "^0.2.2",
     "react-native-svg": "^6.4.1",
     "react-native-svg-charts": "^5.2.0",
