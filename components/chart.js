@@ -64,6 +64,7 @@ export default class Chart extends Component {
       >
         <View style={{ flex: 1, marginLeft: 0, marginRight: 10 }}>
           <BarChart
+            animate
             style={{ marginHorizontal: 10, flex: 1 }}
             data={data}
             gridMax={2}

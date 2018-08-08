@@ -123,10 +123,11 @@ class ChartScreen extends Component {
           </Text>
           <Chart />
           <ButtonGroup
+            containerStyle={styles.ButtonGroupContainerStyle}
             onPress={this.updateIndex}
             selectedIndex={selectedIndex}
             buttons={buttons}
-            containerBorderRadius={20}
+            //   containerBorderRadius={20}
           />
           <View style={styles.buttonsContainerBottomStyle}>
             <Button
@@ -144,6 +145,11 @@ class ChartScreen extends Component {
 }
 
 const styles = {
+  ButtonGroupContainerStyle: {
+    borderRadius: 15,
+    marginLeft: 20,
+    marginRight: 20
+  },
   modalStyle: {
     flex: 1,
     alignItems: 'center',
