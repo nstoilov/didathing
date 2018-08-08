@@ -55,14 +55,10 @@ class ChartScreen extends Component {
   };
 
   render() {
-    const component1 = () => <Text>Days</Text>;
-    const component2 = () => <Text>Weeks</Text>;
-    const component3 = () => <Text>Months</Text>;
-    const buttons = [
-      { element: component1 },
-      { element: component2 },
-      { element: component3 }
-    ];
+    //  const component1 = () => <Text>Days</Text>;
+    //  const component2 = () => <Text>Weeks</Text>;
+    //  const component3 = () => <Text>Months</Text>;
+    const buttons = ['Days', 'Weeks', 'Months'];
     const { selectedIndex } = this.state;
     return (
       <View style={styles.modalStyle}>
@@ -80,15 +76,17 @@ class ChartScreen extends Component {
             <Button
               title="Yes"
               large
-              color="black"
+              color="white"
               buttonStyle={styles.buttonBottomStyle}
+              textStyle={{ fontWeight: 'bold', fontSize: 20 }}
               onPress={this.onModalConfirm}
             />
             <Button
               title="No"
               large
-              color="black"
+              color="white"
               buttonStyle={styles.buttonBottomStyle}
+              textStyle={{ fontWeight: 'bold', fontSize: 20 }}
               onPress={this.toggleModal}
             />
           </View>
@@ -98,19 +96,19 @@ class ChartScreen extends Component {
           <View style={styles.buttonsContainerTopStyle}>
             <Button
               title="Edit"
-              color="black"
+              color="white"
               buttonStyle={styles.buttonTopStyle}
               onPress={() => this.onPressEdit()}
             />
             <Button
               title="Clear All Data"
-              color="black"
+              color="white"
               buttonStyle={styles.buttonTopStyle}
               onPress={this.toggleModal}
             />
             <Button
               title="Undo"
-              color="black"
+              color="white"
               buttonStyle={styles.buttonTopStyle}
               onPress={() => this.onPressUndo()}
             />
@@ -124,6 +122,9 @@ class ChartScreen extends Component {
           <Chart />
           <ButtonGroup
             containerStyle={styles.ButtonGroupContainerStyle}
+            innerBorderStyle={{ width: 1, color: '#50D1CB' }}
+            selectedButtonStyle={{ backgroundColor: '#50D1CB' }}
+            selectedTextStyle={{ color: 'white', fontSize: 17 }}
             onPress={this.updateIndex}
             selectedIndex={selectedIndex}
             buttons={buttons}
@@ -133,7 +134,8 @@ class ChartScreen extends Component {
             <Button
               title="Did it"
               large
-              color="black"
+              color="white"
+              textStyle={{ fontWeight: 'bold', fontSize: 20 }}
               buttonStyle={styles.buttonBottomStyle}
               onPress={() => this.onPressDidIt()}
             />
@@ -146,7 +148,9 @@ class ChartScreen extends Component {
 
 const styles = {
   ButtonGroupContainerStyle: {
-    borderRadius: 15,
+    borderRadius: 20,
+    borderColor: '#50D1CB',
+    backgroundColor: 'white',
     marginLeft: 20,
     marginRight: 20
   },
@@ -191,23 +195,23 @@ const styles = {
     marginBottom: 10
   },
   buttonTopStyle: {
-    backgroundColor: 'white',
+    backgroundColor: '#50D1CB',
     //  width: 200,
     // height: 55,
-    borderColor: 'grey',
+    borderColor: '#50D1CB',
     paddingVertical: 3,
     borderWidth: 1,
-    borderRadius: 15,
+    borderRadius: 20,
     marginBottom: 10,
     marginTop: 10
   },
   buttonBottomStyle: {
-    backgroundColor: 'white',
+    backgroundColor: '#50D1CB',
     width: 300,
     height: 55,
-    borderColor: 'grey',
-    borderWidth: 2,
-    borderRadius: 20,
+    //  borderColor: 'black',
+    //  borderWidth: 1,
+    borderRadius: 30,
     marginBottom: 10,
     marginTop: 10
   }

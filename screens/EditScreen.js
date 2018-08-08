@@ -21,7 +21,7 @@ class EditScreen extends Component {
           <TextInput
             placeholder={store.goal.name}
             onChangeText={text => store.setGoal('name', text)}
-            underlineColorAndroid="grey"
+            underlineColorAndroid="#50D1CB"
             style={styles.inputStyle}
           />
         </View>
@@ -36,8 +36,9 @@ class EditScreen extends Component {
             <Button
               title="Done"
               large
-              color="black"
+              color="white"
               buttonStyle={styles.buttonStyle}
+              textStyle={{ fontWeight: 'bold', fontSize: 20 }}
               onPress={this.OnPress}
             />
           </View>
@@ -77,12 +78,12 @@ const styles = {
     marginTop: 40
   },
   buttonStyle: {
-    backgroundColor: 'white',
+    backgroundColor: '#50D1CB',
     width: 300,
     height: 55,
-    borderColor: 'grey',
-    borderWidth: 1,
-    borderRadius: 20
+    //  borderColor: 'grey',
+    //  borderWidth: 1,
+    borderRadius: 30
   },
   textStyle: {
     textAlign: 'center',

@@ -22,9 +22,9 @@ export default class Chart extends Component {
           x2={'100%'}
           y1={y(lineY)}
           y2={y(lineY)}
-          stroke={'grey'}
+          stroke={'#50D1CB'}
           strokeDasharray={[4, 8]}
-          strokeWidth={2}
+          strokeWidth={1}
         />
         <Text x={'0%'} y={y(lineY)} fontSize="17">
           {lineY}
@@ -71,7 +71,7 @@ export default class Chart extends Component {
             contentInset={{ top: 20, bottom: 20, left: 30, right: 10 }}
             // spacing={0.4}
             spacingInner={0.6}
-            svg={{ stroke: 'rgb(134, 65, 244)' }}
+            svg={{ fill: '#50D1CB', stroke: '#50D1CB' }}
           >
             <Labels />
             <HorizontalLine />

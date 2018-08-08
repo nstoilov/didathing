@@ -12,13 +12,19 @@ class WelcomeScreen extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.text}> Welcome </Text>
+        <View>
+          <Text style={styles.titleStyle}> Welcome </Text>
+          <Text style={styles.subtitleStyle}>
+            Use this app to track something
+          </Text>
+        </View>
         <View style={styles.buttonContainer}>
           <Button
             title="Add thing"
             large
-            color="black"
+            color="white"
             buttonStyle={styles.buttonConfirm}
+            textStyle={{ fontWeight: 'bold', fontSize: 20 }}
             onPress={() => this.onPress()}
           />
         </View>
@@ -34,22 +40,29 @@ const styles = {
     justifyContent: 'space-around',
     backgroundColor: 'white'
   },
-  text: {
-    textAlign: 'center',
+  titleStyle: {
     fontSize: 40,
-    color: 'black'
+    color: 'black',
+    textAlign: 'center',
+    marginBottom: 10
+  },
+  subtitleStyle: {
+    fontSize: 20,
+    color: 'black',
+    textAlign: 'center',
+    marginBottom: 40
   },
   buttonContainer: {
     flexDirection: 'row',
     justifyContent: 'center'
   },
   buttonConfirm: {
-    backgroundColor: 'white',
+    backgroundColor: '#50D1CB',
     width: 200,
     height: 55,
-    borderColor: 'black',
-    borderWidth: 1,
-    borderRadius: 20
+    //borderColor: 'black',
+    // borderWidth: 1,
+    borderRadius: 30
   }
 };
 
