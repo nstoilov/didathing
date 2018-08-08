@@ -66,18 +66,31 @@ class ChartScreen extends Component {
     const { selectedIndex } = this.state;
     return (
       <View style={styles.modalStyle}>
-        <TouchableOpacity onPress={this.toggleModal}>
-          <Text>Show Modal</Text>
-        </TouchableOpacity>
-        <Modal isVisible={this.state.isModalVisible}>
+        <Modal
+          backdropOpacity={0.8}
+          isVisible={this.state.isModalVisible}
+          animationIn="bounceIn"
+          animationOut="fadeOut"
+          onBackdropPress={() => this.toggleModal()}
+        >
           <View style={styles.modalStyle}>
-            <Text>Are you sure?</Text>
-            <TouchableOpacity onPress={this.onModalConfirm}>
-              <Text>Yes</Text>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={this.toggleModal}>
-              <Text>No</Text>
-            </TouchableOpacity>
+            <Text style={styles.modalTitleStyle}>
+              Are you sure you want to delete all data?
+            </Text>
+            <Button
+              title="Yes"
+              large
+              color="black"
+              buttonStyle={styles.buttonBottomStyle}
+              onPress={this.onModalConfirm}
+            />
+            <Button
+              title="No"
+              large
+              color="black"
+              buttonStyle={styles.buttonBottomStyle}
+              onPress={this.toggleModal}
+            />
           </View>
         </Modal>
 
@@ -102,7 +115,9 @@ class ChartScreen extends Component {
               onPress={() => this.onPressUndo()}
             />
           </View>
-          <Text style={styles.titleStyle}>{store.goal.name}</Text>
+          <TouchableOpacity onPress={() => this.onPressEdit()}>
+            <Text style={styles.titleStyle}>{store.goal.name}</Text>
+          </TouchableOpacity>
           <Text style={styles.subtitleStyle}>
             {`Goal: ${store.goal.times} per ${store.goal.per}`}
           </Text>
@@ -130,11 +145,19 @@ class ChartScreen extends Component {
 
 const styles = {
   modalStyle: {
-    flex: 1
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center'
   },
   titleStyle: {
     fontSize: 40,
     color: 'black',
+    textAlign: 'center',
+    marginBottom: 10
+  },
+  modalTitleStyle: {
+    fontSize: 30,
+    color: 'white',
     textAlign: 'center',
     marginBottom: 10
   },
