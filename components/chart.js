@@ -10,7 +10,6 @@ export default class Chart extends Component {
   render() {
     const data = store.getChartEvents();
     const chartLegends = store.getChartLegends();
-    //  const lineY = store.goal.times;
     const lineY = store.getGoal();
     const screenWidth = Dimensions.get('window').width;
 
@@ -49,7 +48,6 @@ export default class Chart extends Component {
       ));
 
     const axesSvg = { fontSize: 18, fill: 'black' };
-    //const verticalContentInset = { top: 10, bottom: 10 };
     const xAxisHeight = 30;
 
     return (
@@ -64,7 +62,6 @@ export default class Chart extends Component {
       >
         <View style={{ flex: 1, marginLeft: 0, marginRight: 10 }}>
           <BarChart
-            animate
             style={{ marginHorizontal: 10, flex: 1 }}
             data={data}
             gridMax={2}

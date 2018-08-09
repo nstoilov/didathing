@@ -19,10 +19,10 @@ class EditScreen extends Component {
         <Text style={styles.titleStyle}>Name your thing:</Text>
         <View>
           <TextInput
+            style={styles.inputStyle}
             placeholder={store.goal.name}
             onChangeText={text => store.setGoal('name', text)}
             underlineColorAndroid="#50D1CB"
-            style={styles.inputStyle}
           />
         </View>
         <HideWithKeyboard>
@@ -81,8 +81,6 @@ const styles = {
     backgroundColor: '#50D1CB',
     width: 300,
     height: 55,
-    //  borderColor: 'grey',
-    //  borderWidth: 1,
     borderRadius: 30
   },
   textStyle: {
