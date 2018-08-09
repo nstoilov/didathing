@@ -9,7 +9,7 @@ import store from '../mobx/Store';
 
 @observer
 class EditScreen extends Component {
-  OnPress = async () => {
+  onPress = async () => {
     this.props.navigation.navigate('chart');
   };
 
@@ -39,7 +39,7 @@ class EditScreen extends Component {
               color="white"
               buttonStyle={styles.buttonStyle}
               textStyle={{ fontWeight: 'bold', fontSize: 20 }}
-              onPress={this.OnPress}
+              onPress={this.onPress}
             />
           </View>
         </HideWithKeyboard>

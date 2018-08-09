@@ -4,9 +4,8 @@ import { AsyncStorage } from 'react-native';
 import moment from 'moment';
 
 class Store {
-  @persist
-  @observable
-  token = false;
+  // @persist
+  @observable token = false;
 
   @persist('object')
   @observable

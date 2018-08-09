@@ -5,7 +5,7 @@ import { Button, ButtonGroup } from 'react-native-elements';
 import moment from 'moment';
 import Modal from 'react-native-modal';
 import store from '../mobx/Store';
-import Chart from '../components/chart';
+import Chart from '../components/Chart';
 
 @observer
 class ChartScreen extends Component {

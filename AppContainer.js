@@ -17,8 +17,8 @@ export default class AppContainer extends React.Component {
           main: {
             screen: TabNavigator(
               {
-                chart: { screen: ChartScreen },
-                edit: { screen: EditScreen }
+                edit: { screen: EditScreen },
+                chart: { screen: ChartScreen }
               },
               {
                 swipeEnabled: false,
@@ -47,8 +47,8 @@ export default class AppContainer extends React.Component {
             screen: TabNavigator(
               {
                 welcome: { screen: WelcomeScreen },
-                chart: { screen: ChartScreen },
-                edit: { screen: EditScreen }
+                edit: { screen: EditScreen },
+                chart: { screen: ChartScreen }
               },
               {
                 swipeEnabled: false,

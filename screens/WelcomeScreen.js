@@ -15,7 +15,7 @@ class WelcomeScreen extends Component {
         <View>
           <Text style={styles.titleStyle}> Welcome </Text>
           <Text style={styles.subtitleStyle}>
-            Use this app to track something
+            Use this app to track something button
           </Text>
         </View>
         <View style={styles.buttonContainer}>
@@ -25,7 +25,7 @@ class WelcomeScreen extends Component {
             color="white"
             buttonStyle={styles.buttonConfirm}
             textStyle={{ fontWeight: 'bold', fontSize: 20 }}
-            onPress={() => this.onPress()}
+            onPress={this.onPress}
           />
         </View>
       </View>
@@ -60,8 +60,6 @@ const styles = {
     backgroundColor: '#50D1CB',
     width: 200,
     height: 55,
-    //borderColor: 'black',
-    // borderWidth: 1,
     borderRadius: 30
   }
 };
