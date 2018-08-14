@@ -15,7 +15,7 @@ class WelcomeScreen extends Component {
         <View>
           <Text style={styles.titleStyle}> Welcome </Text>
           <Text style={styles.subtitleStyle}>
-            Use this app to track something button
+            Use this app to track something
           </Text>
         </View>
         <View style={styles.buttonContainer}>

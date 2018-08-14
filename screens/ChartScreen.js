@@ -124,11 +124,11 @@ class ChartScreen extends Component {
             containerStyle={styles.ButtonGroupContainerStyle}
             innerBorderStyle={{ width: 1, color: '#50D1CB' }}
             selectedButtonStyle={{ backgroundColor: '#50D1CB' }}
-            selectedTextStyle={{ color: 'white', fontSize: 17 }}
+            selectedTextStyle={{ color: 'white', fontSize: 16 }}
+            textStyle={{ fontSize: 15 }}
             onPress={this.updateIndex}
             selectedIndex={selectedIndex}
             buttons={buttons}
-            //   containerBorderRadius={20}
           />
           <View style={styles.buttonsContainerBottomStyle}>
             <Button
