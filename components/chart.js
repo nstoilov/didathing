@@ -68,7 +68,9 @@ export default class Chart extends Component {
             contentInset={{ top: 20, bottom: 20, left: 30, right: 10 }}
             // spacing={0.4}
             spacingInner={0.6}
-            svg={{ fill: '#50D1CB', stroke: '#50D1CB' }}
+            // svg={{ fill: '#50D1CB', stroke: '#50D1CB' }}
+            //  svg={{ fill: '#ff71ce', stroke: '#ff71ce' }}
+            svg={{ fill: '#e2b5ff', stroke: '#e2b5ff' }}
           >
             <Labels />
             <HorizontalLine />

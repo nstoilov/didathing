@@ -78,7 +78,7 @@ const styles = {
     marginTop: 40
   },
   buttonStyle: {
-    backgroundColor: '#50D1CB',
+    backgroundColor: '#e2b5ff',
     width: 300,
     height: 55,
     borderRadius: 30

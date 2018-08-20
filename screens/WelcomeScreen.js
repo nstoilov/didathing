@@ -5,7 +5,8 @@ import store from '../mobx/Store';
 
 class WelcomeScreen extends Component {
   onPress = async () => {
-    store.saveReturnUserToken();
+    await store.saveReturnUserToken();
+    console.log('store.token', store.token);
     this.props.navigation.navigate('edit');
   };
 
@@ -57,7 +58,7 @@ const styles = {
     justifyContent: 'center'
   },
   buttonConfirm: {
-    backgroundColor: '#50D1CB',
+    backgroundColor: '#e2b5ff',
     width: 200,
     height: 55,
     borderRadius: 30

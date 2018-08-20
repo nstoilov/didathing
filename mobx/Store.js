@@ -4,9 +4,6 @@ import { AsyncStorage } from 'react-native';
 import moment from 'moment';
 
 class Store {
-  // @persist
-  @observable token = false;
-
   @persist('object')
   @observable
   goal = {
@@ -35,7 +32,8 @@ class Store {
     'Today'
   ];
 
-  @observable modalVisible = false;
+  @observable
+  modalVisible = false;
 
   @observable
   chartLegendsWeeks = [
@@ -68,7 +66,7 @@ class Store {
   };
 
   saveReturnUserToken = () => {
-    this.token = true;
+    AsyncStorage.setItem('token', 'true');
   };
 
   setGoal = (key, item) => {
@@ -230,3 +228,4 @@ const store = new Store();
 export default store;
 
 hydrate('events', store).then(() => console.log('observable events hydrated'));
+//hydrate('token', store).then(() => console.log('observable token hydrated'));

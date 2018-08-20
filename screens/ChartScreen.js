@@ -77,7 +77,7 @@ class ChartScreen extends Component {
               title="Yes"
               large
               color="white"
-              buttonStyle={styles.buttonBottomStyle}
+              buttonStyle={styles.buttonModalStyle}
               textStyle={{ fontWeight: 'bold', fontSize: 20 }}
               onPress={this.onModalConfirm}
             />
@@ -85,7 +85,7 @@ class ChartScreen extends Component {
               title="No"
               large
               color="white"
-              buttonStyle={styles.buttonBottomStyle}
+              buttonStyle={styles.buttonModalStyle}
               textStyle={{ fontWeight: 'bold', fontSize: 20 }}
               onPress={this.toggleModal}
             />
@@ -148,6 +148,7 @@ class ChartScreen extends Component {
 
 const styles = {
   ButtonGroupContainerStyle: {
+    height: 35,
     borderRadius: 20,
     borderColor: '#50D1CB',
     backgroundColor: 'white',
@@ -198,7 +199,7 @@ const styles = {
     backgroundColor: '#50D1CB',
     //  width: 200,
     // height: 55,
-    borderColor: '#50D1CB',
+    borderColor: '#5de2dc',
     paddingVertical: 3,
     borderWidth: 1,
     borderRadius: 20,
@@ -206,6 +207,18 @@ const styles = {
     marginTop: 10
   },
   buttonBottomStyle: {
+    // backgroundColor: '#50D1CB',
+    // backgroundColor: '#ff71ce',
+    backgroundColor: '#e2b5ff',
+    width: 300,
+    height: 55,
+    //  borderColor: 'black',
+    //  borderWidth: 1,
+    borderRadius: 30,
+    marginBottom: 10,
+    marginTop: 10
+  },
+  buttonModalStyle: {
     backgroundColor: '#50D1CB',
     width: 300,
     height: 55,
