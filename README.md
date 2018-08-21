@@ -3,7 +3,7 @@ Repo for the Did a thing app.
 
 Built with React Native.
 
-Uses (among others):
+The app uses (among other stuff):
 - MobX
 - Moment.JS
 - React Native Elements
