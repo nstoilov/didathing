@@ -1,7 +1,6 @@
 import React from 'react';
 import { TabNavigator } from 'react-navigation';
 import { observer } from 'mobx-react';
-//import store from './mobx/Store';
 import { AsyncStorage } from 'react-native';
 import WelcomeScreen from './screens/WelcomeScreen';
 import EditScreen from './screens/EditScreen';
@@ -12,9 +11,7 @@ export default class AppContainer extends React.Component {
   state = { token: null };
 
   async componentWillMount() {
-    //AsyncStorage.removeItem('token');
-    // eslint-disable-next-line
-    let token = await AsyncStorage.getItem('token');
+    const token = await AsyncStorage.getItem('token');
     if (token) {
       this.setState({ token: true });
     } else {

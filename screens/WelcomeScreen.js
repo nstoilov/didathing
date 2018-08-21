@@ -6,7 +6,6 @@ import store from '../mobx/Store';
 class WelcomeScreen extends Component {
   onPress = async () => {
     await store.saveReturnUserToken();
-    console.log('store.token', store.token);
     this.props.navigation.navigate('edit');
   };
 

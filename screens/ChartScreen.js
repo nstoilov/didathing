@@ -55,9 +55,6 @@ class ChartScreen extends Component {
   };
 
   render() {
-    //  const component1 = () => <Text>Days</Text>;
-    //  const component2 = () => <Text>Weeks</Text>;
-    //  const component3 = () => <Text>Months</Text>;
     const buttons = ['Days', 'Weeks', 'Months'];
     const { selectedIndex } = this.state;
     return (
@@ -117,7 +114,7 @@ class ChartScreen extends Component {
             <Text style={styles.titleStyle}>{store.goal.name}</Text>
           </TouchableOpacity>
           <Text style={styles.subtitleStyle}>
-            {`Goal: ${store.goal.times} per ${store.goal.per}`}
+            {`Goal: ${store.getGoal()} per ${store.chartMode.slice(0, -1)}`}
           </Text>
           <Chart />
           <ButtonGroup
@@ -197,8 +194,7 @@ const styles = {
   },
   buttonTopStyle: {
     backgroundColor: '#50D1CB',
-    //  width: 200,
-    // height: 55,
+
     borderColor: '#5de2dc',
     paddingVertical: 3,
     borderWidth: 1,
@@ -207,13 +203,10 @@ const styles = {
     marginTop: 10
   },
   buttonBottomStyle: {
-    // backgroundColor: '#50D1CB',
-    // backgroundColor: '#ff71ce',
     backgroundColor: '#e2b5ff',
     width: 300,
     height: 55,
-    //  borderColor: 'black',
-    //  borderWidth: 1,
+
     borderRadius: 30,
     marginBottom: 10,
     marginTop: 10
@@ -222,8 +215,7 @@ const styles = {
     backgroundColor: '#50D1CB',
     width: 300,
     height: 55,
-    //  borderColor: 'black',
-    //  borderWidth: 1,
+
     borderRadius: 30,
     marginBottom: 10,
     marginTop: 10

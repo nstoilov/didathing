@@ -211,21 +211,18 @@ class Store {
           .subtract(minus, 'months')
           .format('MMM')
     );
-    console.log('result.slice().length', result.slice().length);
+
     return result.slice().length;
   };
 }
 
 const hydrate = create({
-  storage: AsyncStorage, // or AsyncStorage in react-native.
-  // default: localStorage
-  jsonify: true // if you use AsyncStorage, here shoud be true
-  // default: true
+  storage: AsyncStorage,
+  jsonify: true
 });
 
 const store = new Store();
 
 export default store;
 
-hydrate('events', store).then(() => console.log('observable events hydrated'));
-//hydrate('token', store).then(() => console.log('observable token hydrated'));
+hydrate('events', store);
